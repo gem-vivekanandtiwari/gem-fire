@@ -1,0 +1,15 @@
+{
+  "environment" :"beta",
+  "beta" : {
+    "baseUrl" : "https://google.com",
+    "enableSSl" : false,
+    "bearerToken" : "token"
+  },
+  "prod" : {
+    "baseUrl" : "https://google.com",
+    "enableSSl" : false,
+    "bearerToken" : "token"
+  }
+
+
+}
