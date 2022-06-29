@@ -3,6 +3,8 @@ package com.gemini.gemecosystem.stepdefinitions;
 
 
 
+import io.cucumber.datatable.DataTable;
+import io.cucumber.docstring.DocString;
 import org.apache.commons.codec.binary.StringUtils;
 import org.apache.http.client.utils.URIBuilder;
 
@@ -78,10 +80,18 @@ public class Request {
         String dataType = obj.getClass().getSimpleName().toLowerCase();
         switch (dataType){
             case "DataTable" :
+                createRequestFromDataTable((DataTable)obj);
                 break;
 
             case "DocString" :
+                createRequestFromDocString((DocString)obj);
                 break;
         }
+    }
+
+    private void createRequestFromDocString(DocString obj) {
+    }
+
+    private void createRequestFromDataTable(DataTable obj) {
     }
 }

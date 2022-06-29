@@ -1,9 +1,10 @@
 Feature: Sample feature
 
   Scenario: Sample Scenario
-    Given Request : Step description :
+    Given Request : Create a user :
     """ {
-    "url": declaredKey,
+    "url": config.env.baseUrl,
+    "path" : "/account/vivek"
      "method" : "get/post/put/delete/",
      "headers" : ""/ readFile(filePath),
      "requestBody" : {}/ readFile(filePath),
@@ -30,7 +31,13 @@ Feature: Sample feature
     Given Assert : Assert Statement : response.key  equals(Assert value)
 
 
-    Given set key = value
+    Given set name  = Akash
+    Given set name  = Vivek
+
+    Given Request : Search Name in the list :
+    """
+    {"url" : "*?userID=USERid}
+    """
     Given set key = readFile(filePath)
     Given set key = readJsonFile(filePath)
     Given set key =
@@ -38,3 +45,11 @@ Feature: Sample feature
     {name = vivek }
 
     """
+
+
+    Scenario: ScenarioName
+      Given gemjarKeyWord(Action to be taken) : User Statement  : InputData
+      # gemjar keyword (mandatory) : optional :
+
+      Given Set : : name = vivek
+      Given Assert : verifying name
