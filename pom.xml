@@ -36,6 +36,16 @@
             <version>7.4.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.gemecosystem.gemjar</groupId>
+            <artifactId>gemjar</artifactId>
+            <version>1.0.0</version>
+            <!--            <groupId>com.gemecosystem.gemjar</groupId>-->
+            <!--            <artifactId>gemjar-core</artifactId>-->
+            <!--            <version>1.0.6</version>-->
+        </dependency>
+
+
     </dependencies>
 
 </project>
