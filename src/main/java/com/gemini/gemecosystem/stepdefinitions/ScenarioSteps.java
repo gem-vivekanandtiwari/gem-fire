@@ -158,19 +158,21 @@ public class ScenarioSteps {
 
     @And("^Assert\\h:\\h(.+)\\h:")
     public void Assert(String assertStatement, String str) {
+        GemTestReporter.addTestStep("Assert Statement", assertStatement, STATUS.INFO);
         JsonParser parser = new JsonParser();
         JsonObject json = (JsonObject) parser.parse(str);
-        assertion(json);
+        Assert.assertion(recentResponse,json);
     }
 
     @And("^Assert\\h:\\h(.+)\\h:\\hreadfile\\((.+)\\)$")
     public void AssertFile(String assertStatement, String filePath) {
+        GemTestReporter.addTestStep("Assert Statement", assertStatement, STATUS.INFO);
         try {
             File file = new File(filePath);
             String content = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
             JsonParser parser = new JsonParser();
             JsonObject json = (JsonObject) parser.parse(content);
-            assertion(json);
+            Assert.assertion(recentResponse,json);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -179,52 +181,6 @@ public class ScenarioSteps {
         }
     }
 
-    public void assertion(JsonObject validationQueries) {
-        try {
-            Set<String> keySet = validationQueries.keySet();
-            Iterator keys = keySet.iterator();
-//					System.out.println("keySet ---> "+ keySet);
-            while (keys.hasNext()) {
-                String query = keys.next().toString();
-                String targetQuery = validationQueries.get(query).getAsString();
-                //target.trim();
-                String[] targetArray = targetQuery.trim().split("\\s+");
-                int index = targetQuery.indexOf(" ");
-                String operator = targetQuery.substring(0, index);
-                String target = targetQuery.substring(index + 1);
-                if (query.toUpperCase().contains("DEEPSEARCH")) {
-                    String deepSearchQuery = query.substring(query.indexOf("(") + 1, query.indexOf(")"));
-                    // Call the deepSearch function here with keyname as "deepSearchQuery"
-                    JsonArray result = ApiHealthCheckUtils.deepSearch(recentResponse, deepSearchQuery);
-                    if (result.size() == 0) {
-                        GemTestReporter.addTestStep("DeepSearch of key ~ " + deepSearchQuery, "DeepSearch Failed <BR> No Such Key Exist in Response", STATUS.FAIL);
-                    } else {
-//								GemTestReporter.addTestStep("DeepSearch of key ~ '"+deepSearchQuery+"'","DeepSearch Successful <BR>"+result.toString(),STATUS.PASS);
-                        Boolean f = false;
-                        for (int j = 0; j < result.size(); j++) {
-                            String value = result.get(j).getAsJsonObject().keySet().iterator().next();
-                            String loc = result.get(j).getAsJsonObject().get(value).getAsString();
-//									GemTestReporter.addTestStep("DeepSearch of key ~ '"+deepSearchQuery+"'","Value of the Key ~ "+value+"<BR> Location ~ "+loc,STATUS.INFO);
-                            Boolean temp = ApiHealthCheckUtils.assertionMethods(deepSearchQuery, value, target, operator, loc);
-                            if (temp) {
-                                f = temp;
-                            }
-                        }
-                        if (!f) {
-                            GemTestReporter.addTestStep("DeepSearch of key ~ " + deepSearchQuery, "DeepSearch Failed <BR> Expected value does not match actual value <BR> Expected value ~ " + target, STATUS.FAIL);
-                        }
-                    }
-                } else {
-
-                    ApiHealthCheckUtils.postAssertion(recentResponse, query, operator, target);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            GemTestReporter.addTestStep("Some error occurred in Assertion", "Some error occurred", STATUS.FAIL);
-
-        }
-    }
 
 
 

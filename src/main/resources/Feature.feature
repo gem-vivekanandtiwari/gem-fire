@@ -64,7 +64,7 @@ Feature: Example
     }
     }
     """
-    And Assert : sample assertion  :
+    And Assert : validating name  :
     """
     {
     "response(name)":"to AKASH",
