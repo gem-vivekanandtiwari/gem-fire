@@ -38,13 +38,13 @@ Feature: Sample feature
     """
     {"url" : "*?userID=USERid}
     """
-    Given set key = readFile(filePath)
-    Given set key = readJsonFile(filePath)
+    Given set a = readFile(filePath)
     Given set key =
     """
-    {name = vivek }
-
+    {"name" : "vivek" }
     """
+    Given set key = " hello world"
+    Given set name  = Akash
 
 
     Scenario: ScenarioName
