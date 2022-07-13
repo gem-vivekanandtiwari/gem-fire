@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -28,6 +28,12 @@
             <version>4.5.13</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.gemecosystem.gemjar</groupId>
+            <artifactId>gemjar-core</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+
 
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -35,31 +41,15 @@
             <version>7.4.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.gemecosystem.gemjar</groupId>
-            <artifactId>gemjar</artifactId>
-            <version>1.0.0</version>
-            <!--            <groupId>com.gemecosystem.gemjar</groupId>-->
-            <!--            <artifactId>gemjar-core</artifactId>-->
-            <!--            <version>1.0.6</version>-->
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>LATEST</version>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>7.3.4</version>
-        </dependency>
     </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+    </build>
 
 </project>
