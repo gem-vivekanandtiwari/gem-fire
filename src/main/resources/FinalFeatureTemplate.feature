@@ -1,8 +1,6 @@
 Feature: Final Templete
 
-  Scenario: Example BaseURl
-#    Given baseUrl https://gorest.co.in/public/v2/users
-##    Given path /public/v2/users
+  Scenario: Example Get Request
     Given url https://gorest.co.in/public/v2/users
     Given params id = 4033
     Given params id = 2667
@@ -28,7 +26,7 @@ Scenario: test Post Request
   Given Assert : verify name : #(response.name) EQUALS PawanDeep
 
 
-  Scenario: Request DocString
+  Scenario: Request DocString Get Request
     Given Set baseURL = https://gorest.co.in
     Given Request : Demo RequestDocString :
       """
@@ -42,8 +40,6 @@ Scenario: test Post Request
     Given Print #(var1)
     Given Print #(response[0].id)
     Given Print #(response)
-    Given Print #(environment)
-    Given Print var2#(var1)
     Given Assert : DO ASSERTION : #(response[0].id) EQUALS #(response[1].id)
     Given Request : Demo RequestDocString with param :
       """
@@ -58,8 +54,7 @@ Scenario: test Post Request
       """
     Given Print #(response)
 
-  Scenario: Request DocString post
-    Given Set baseURL = https://gorest.co.in
+  Scenario: Request DocString post request
     Given Request : Demo RequestDocString :
       """
       {
@@ -69,62 +64,6 @@ Scenario: test Post Request
       "requestBody" : {"name": "PawanDeep","gender": "male","email": "pawan#epoch#@gmail.com","status":"active"}
       }
       """
-    Given Set var1 = fn(EPOCH)
-#    Given Print #(var1)
-#    Given Print #(response[0].id)
     Given Print #(response)
-#    Given Print #(environment)
-#    Given Print var2#(var1)
-#    Given Assert : DO ASSERTION : #(response[0].id) EQUALS #(response[1].id)
-#    Given Request : Demo RequestDocString with param :
-#      """
-#      {
-#      "baseUrl" : "#(baseURL)",
-#      "path" : "/public/v2/users",
-#      "method" : "get",
-#      "params" :{
-#        "id" : "#(response[0].id)"
-#        }
-#      }
-#      """
-#    Given Print #(response)
-
-#  Scenario: Request DocString2
-#    Given Request : Demo RequestDocString :
-#      """
-#      {
-#      "baseUrl" : "#(baseURL)",
-#      "path" : "/public/v2/users",
-#      "method" : "get"
-#      }
-#      """
-#    Given Set var1 = fn(EPOCH)
-#    Given Print #(var1)
-#    Given Print #(response[0].id)
-#    Given Print #(response)
-#    Given Print #(environment)
-#    Given Print var2#(var1)
-#    Given Assert : verifying name : vivek EQUALS vivek
-#
-
-    Given baseUrl https://gorest.co.in
-    Given path /public/v2/users
-    Given params id = 4033
-    Given params id = 4034
-    Given headers token = abcd
-    Given method get
-
-
-
-  Scenario: Request DocString
-    Given Request : Demo RequestDocString :
-      """
-      {
-      "baseUrl" : "https://gorest.co.in",
-      "path" : "/public/v2/users",
-      "params" : "4034",
-      "method" : "get"
-      }
-      """
-
-
+    Given Print #(status)
+    Given Print #(responseMessage)
